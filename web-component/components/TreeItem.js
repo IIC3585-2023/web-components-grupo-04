@@ -43,7 +43,6 @@ export default class TreeItem extends HTMLElement {
   }
 
   showChildren() {
-    this.$children = this._shadowRoot.querySelector("slot");
     this.$children.style.display =
       this.$children.style.display === "block" ? "none" : "block";
   }
