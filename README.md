@@ -9,7 +9,7 @@
 ## Setup
 
 1. Clone the repository.
-2. `cd svelte-grupo-04`
+2. `cd web-components-grupo-04`
 
 ## How to run
 
