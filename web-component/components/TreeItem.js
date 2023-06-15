@@ -25,16 +25,16 @@ export default class TreeItem extends HTMLElement {
     this._shadowRoot = this.attachShadow({ mode: "open" });
     this._shadowRoot.appendChild(template.content.cloneNode(true));
 
-    const $children = this._shadowRoot.querySelector("slot");
-    const $button = this._shadowRoot.querySelector("button");
+    this.$children = this._shadowRoot.querySelector("slot");
+    this.$button = this._shadowRoot.querySelector("button");
 
     // Set the button's text to the text attribute of the custom element
-    $button.innerText = this.formatText(
-      $children.assignedNodes()[0].textContent
+    this.$button.innerText = this.formatText(
+      this.$children.assignedNodes()[0].textContent
     );
     // remove the text from the slot
-    $children.assignedNodes()[0].textContent = "";
-    $button.addEventListener("click", this.showChildren.bind(this));
+    this.$children.assignedNodes()[0].textContent = "";
+    this.$button.addEventListener("click", this.showChildren.bind(this));
   }
 
   formatText(text) {
@@ -43,8 +43,8 @@ export default class TreeItem extends HTMLElement {
   }
 
   showChildren() {
-    const $children = this._shadowRoot.querySelector("slot");
-    $children.style.display =
-      $children.style.display === "block" ? "none" : "block";
+    this.$children = this._shadowRoot.querySelector("slot");
+    this.$children.style.display =
+      this.$children.style.display === "block" ? "none" : "block";
   }
 }
