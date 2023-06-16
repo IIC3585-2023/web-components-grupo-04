@@ -1,3 +1,7 @@
-import RatingComponent from "./components/RatingComponent.js";
+import Rating from "./components/Rating.js";
+import Product from "./components/Product.js";
+import HeartIcon from "./components/HeartIcon.js";
 
-window.customElements.define("rating-component", RatingComponent);
+window.customElements.define("rating-component", Rating);
+window.customElements.define("product-component", Product);
+window.customElements.define("heart-icon", HeartIcon);

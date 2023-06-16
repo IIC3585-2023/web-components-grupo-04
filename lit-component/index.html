@@ -3,15 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LitComponent - G4</title>
+    <title>LitComponent TESTING</title>
 
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <script src="./index.js" type="module"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      product-component {
+        width: 200px;
+      }
+    </style>
   </head>
   <body>
-    <rating-component rating="3" />
+    <product-component
+      img="../assets/peluche_miku.jpg"
+      name="Peluche Miku"
+      price="20.00"
+      rating="4"
+    />
   </body>
 </html>
