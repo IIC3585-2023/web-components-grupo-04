@@ -4,17 +4,31 @@ template.innerHTML = `
   <style>
     .container {
       margin-left: 20px;
+      display: flex;
       flex-direction: column;
+      background-color: #fbfbfb;
+    }
+
+    #main-button {
+      all: unset;
+      cursor: pointer;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+    }
+
+    #main-button:hover{
+      background-color: #efefef;
     }
 
     slot {
         display: none;
     }
-
   </style>
 
   <div class="container">
-    <button></button>
+    <button id="main-button"></button>
     <slot></slot>
   </div>
 `;
@@ -26,15 +40,22 @@ export default class TreeItem extends HTMLElement {
     this._shadowRoot.appendChild(template.content.cloneNode(true));
 
     this.$children = this._shadowRoot.querySelector("slot");
-    this.$button = this._shadowRoot.querySelector("button");
+    this.$button = this._shadowRoot.querySelector("#main-button");
 
     // Set the button's text to the text attribute of the custom element
-    this.$button.innerText = this.formatText(
-      this.$children.assignedNodes()[0].textContent
-    );
+    const text = this.formatText(this.$children.assignedNodes()[0].textContent);
+    this.$button.innerHTML = `
+      <chevron-icon direction="0"></chevron-icon>
+      <span>${text}</span>
+    `;
+    this.$icon = this._shadowRoot.querySelector("chevron-icon");
+
     // remove the text from the slot
     this.$children.assignedNodes()[0].textContent = "";
-    this.$button.addEventListener("click", this.showChildren.bind(this));
+
+    this.$button.addEventListener("click", () => {
+      this.showChildren();
+    });
   }
 
   formatText(text) {
@@ -43,7 +64,12 @@ export default class TreeItem extends HTMLElement {
   }
 
   showChildren() {
-    this.$children.style.display =
-      this.$children.style.display === "block" ? "none" : "block";
+    if (this.$children.style.display === "block") {
+      this.$children.style.display = "none";
+      this.$icon.direction = 0;
+    } else {
+      this.$children.style.display = "block";
+      this.$icon.direction = 90;
+    }
   }
 }

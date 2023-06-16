@@ -10,36 +10,63 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <script src="./index.js" type="module"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+    </style>
   </head>
   <body>
-    <tree-item>
-      Motores de Bases de Datos
-      <tree-item>
-        Relacionales
+    <div class="container">
+      <tree-item id="pepe">
+        Motores de Bases de Datos
         <tree-item>
-          Open Source
-          <tree-item> MySQL </tree-item>
-          <tree-item> PostgreSQL </tree-item>
+          Relacionales
+          <tree-item>
+            Open Source
+            <tree-item> MySQL </tree-item>
+            <tree-item> PostgreSQL </tree-item>
+          </tree-item>
+          <tree-item>
+            Propietarios
+            <tree-item> Oracle </tree-item>
+            <tree-item> SQL Server </tree-item>
+          </tree-item>
         </tree-item>
         <tree-item>
-          Propietarios
-          <tree-item> Oracle </tree-item>
-          <tree-item> SQL Server </tree-item>
+          NoSQL
+          <tree-item>
+            Modelo Documentos
+            <tree-item> MongoDB </tree-item>
+            <tree-item> CouchDB </tree-item>
+          </tree-item>
+          <tree-item>
+            Modelo Grafos
+            <tree-item> Neo4J </tree-item>
+            <tree-item> SparQL </tree-item>
+          </tree-item>
         </tree-item>
       </tree-item>
-      <tree-item>
-        NoSQL
-        <tree-item>
-          Modelo Documentos
-          <tree-item> MongoDB </tree-item>
-          <tree-item> CouchDB </tree-item>
-        </tree-item>
-        <tree-item>
-          Modelo Grafos
-          <tree-item> Neo4J </tree-item>
-          <tree-item> SparQL </tree-item>
-        </tree-item>
-      </tree-item>
-    </tree-item>    
+    </div>
+
+    <button id="btn" onclick="addTreeItem()">Add tree-item</button>
   </body>
+  <script>
+    function addTreeItem() {
+      // TODO: fix
+      const treeItem = document.createElement("tree-item");
+      treeItem.innerText = "Nuevo tree-item";
+      document.getElementById("pepe").appendChild(treeItem);
+    }
+  </script>
 </html>
