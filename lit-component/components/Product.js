@@ -135,6 +135,7 @@ const style = css`
   .name {
     font-size: 1.2rem;
     font-weight: bold;
+    max-width: 150px;
   }
 
   .price {

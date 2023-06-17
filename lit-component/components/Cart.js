@@ -8,6 +8,7 @@ export default class Cart extends LitElement {
   constructor() {
     super();
     this.products = {};
+    this.$overflowContainer = null;
   }
 
   static get properties() {
@@ -45,31 +46,35 @@ export default class Cart extends LitElement {
   }
 
   toggleOverflowContainer() {
-    // change height of overflow container
-    const overflowContainer = this.shadowRoot.querySelector(
-      ".overflow-container"
-    );
-    if (overflowContainer.style.height === "200px") {
-      overflowContainer.style.height = "0px";
-      overflowContainer.style.padding = "0px";
+    if (!this.$overflowContainer) {
+        this.$overflowContainer = this.shadowRoot.querySelector(
+            ".overflow-container"
+        );
+    }
+    if (this.$overflowContainer.style.height === "0px") {
+      this.$overflowContainer.style.height = "200px";
+      this.$overflowContainer.style.padding = "0.5rem 0";
     } else {
-      overflowContainer.style.height = "200px";
-      overflowContainer.style.padding = "0.5rem 0";
+      this.$overflowContainer.style.height = "0px";
+      this.$overflowContainer.style.padding = "0px";
     }
   }
 
+
   render() {
     return html`
-      <h2>ShoppingCart</h2>
-      <button @click=${() => this.toggleOverflowContainer()}>
-        Show Details
-      </button>
+      <div class="header-cart">
+        <h2>ShoppingCart</h2>
+        <button @click=${() => this.toggleOverflowContainer()}>
+          Show/Hide
+        </button>
+      </div>
       <div class="overflow-container">
         ${Object.keys(this.products).map(
           (product) => html`
             <div class="product-row">
-              <span>${product}</span>
-              <span
+              <span class="name">${product}</span>
+              <span class="price-tag"
                 >$
                 ${(
                   this.products[product].price -
@@ -112,6 +117,32 @@ const style = css`
     box-shadow: 4px 4px 25px -2px rgba(0, 0, 0, 0.3);
   }
 
+  .name {
+    width: 50%;
+  }
+
+  .header-cart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  }
+
+  button:hover {
+    filter: brightness(0.9);
+    transform: scale(0.98);
+  }
+
   input {
     width: 50px;
   }
@@ -134,6 +165,9 @@ const style = css`
     font-size: 1.5rem;
     width: 95%;
     padding: 0.5rem 0;
+  }
+
+  .price-tag, .total {
     font-family: Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji,
       Segoe UI Symbol, Android Emoji, EmojiSymbols;
   }
