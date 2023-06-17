@@ -9,6 +9,12 @@ export default class Product extends LitElement {
     return [style];
   }
 
+  static get properties() {
+    return {
+      addToCart: { type: Function },
+    };
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this.name = this.getAttribute("name");
@@ -42,6 +48,23 @@ export default class Product extends LitElement {
     >`;
   }
 
+  handleAddToCart() {
+    if (typeof this.addToCart === "function") {
+        const event = new CustomEvent("addToCart", {
+          bubbles: true,
+          composed: true,
+          detail: {
+            name: this.name,
+            price: this.price,
+            rating: this.rating,
+            discount: this.discount,
+            img: this.img,
+          },
+        });
+        this.addToCart(event); // Invoke the function with the event as an argument
+      }
+  }
+
   render() {
     return html`
       <div class="container-img">
@@ -51,7 +74,7 @@ export default class Product extends LitElement {
         <span class="name">${this.name}</span>
         ${this.renderPrice()}
         <rating-component rating="${this.rating}"></rating-component>
-        <button class="btn">Add to cart</button>
+        <button class="btn" @click="${this.handleAddToCart}">Add to cart</button>
       </div>
     `;
   }
@@ -67,6 +90,7 @@ const style = css`
     border-radius: 0.5rem;
     box-shadow: 4px 4px 25px -2px rgba(0, 0, 0, 0.3);
     position: relative;
+    background-color: white;
   }
 
   .container-img {
@@ -81,6 +105,7 @@ const style = css`
     padding: 1rem;
     max-width: 200px;
     box-shadow: 4px 4px 25px -2px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease-in-out;
   }
 
   .btn {
@@ -95,6 +120,7 @@ const style = css`
     background-color: #ef4444;
     color: white;
     box-shadow: 4px 4px 25px -2px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease-in-out;
   }
 
   .btn:hover {

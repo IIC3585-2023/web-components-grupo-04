@@ -18,13 +18,13 @@
         align-items: center;
         flex-direction: column;
         gap: 40px;
-      }
-
-      product-component {
+        background-color: whitesmoke;
       }
     </style>
   </head>
   <body>
+    <cart-component id="cart"></cart-component>
+
     <product-component
       img="../assets/miku_peluche.png"
       name="Peluche Miku"
@@ -39,4 +39,16 @@
       rating="4"
     ></product-component>
   </body>
+  <script>
+    const cart = document.querySelector("#cart");
+
+    function addToCart(event) {
+      cart.addProduct(event.detail);
+    }
+
+    const products = document.querySelectorAll("product-component");
+    products.forEach((product) => {
+      product.addToCart = addToCart;
+    });
+  </script>
 </html>
