@@ -46,10 +46,15 @@
       cart.addProduct(event.detail);
     }
 
-    const products = document.querySelectorAll("product-component");
-    products.forEach((product) => {
-      product.addToCart = addToCart;
-    });
+    function addProductToStore(product) {
+      const productComponent = document.createElement("product-component");
+      productComponent.setAttribute("img", product.image);
+      productComponent.setAttribute("name", product.title);
+      productComponent.setAttribute("price", product.price);
+      productComponent.setAttribute("rating", product.rating.rate);
+      productComponent.addToCart = addToCart;
+      document.body.appendChild(productComponent);
+    }
 
     async function getProducts() {
       // buscarse una api que entregue imagenes png en vez de jpg
@@ -64,14 +69,9 @@
     }
     getProducts();
 
-    function addProductToStore(product) {
-      const productComponent = document.createElement("product-component");
-      productComponent.setAttribute("img", product.image);
-      productComponent.setAttribute("name", product.title);
-      productComponent.setAttribute("price", product.price);
-      productComponent.setAttribute("rating", product.rating.rate);
-      productComponent.addToCart = addToCart;
-      document.body.appendChild(productComponent);
-    }
+    const products = document.querySelectorAll("product-component");
+    products.forEach((product) => {
+      product.addToCart = addToCart;
+    });
   </script>
 </html>
