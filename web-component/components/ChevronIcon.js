@@ -5,6 +5,7 @@ template.innerHTML = `
         margin: 0 10px;
         width: 0.5rem;
         aspect-ratio: 1;
+        fill: #fff;
     }
 </style>
 

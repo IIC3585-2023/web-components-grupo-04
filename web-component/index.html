@@ -9,25 +9,19 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
     <script src="./index.js" type="module"></script>
-    <style>
-      body {
-        font-family: sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-      }
-      .container {
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-    </style>
+    <style></style>
   </head>
   <body>
-    <div class="container">
+    <div class="sidebar close">
+      <div class="logo-details">
+        <i class="bx bx-menu"></i>
+        <span class="logo_name">Nombre</span>
+      </div>
       <tree-item id="pepe">
         Motores de Bases de Datos
         <tree-item>
@@ -58,12 +52,24 @@
         </tree-item>
       </tree-item>
     </div>
-
-    <button id="btn" onclick="addTreeItem()">Add tree-item</button>
   </body>
   <script>
     function addTreeItem() {
       document.getElementById("pepe").addTreeItem("Hello World");
     }
+    let arrow = document.querySelectorAll(".arrow");
+    for (var i = 0; i < arrow.length; i++) {
+      arrow[i].addEventListener("click", (e) => {
+        let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
+        arrowParent.classList.toggle("showMenu");
+      });
+    }
+    let sidebar = document.querySelector(".sidebar");
+    let mainContent = document.querySelector(".main-content");
+    let sidebarBtn = document.querySelector(".bx-menu");
+    sidebarBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("close");
+      mainContent.classList.toggle("close");
+    });
   </script>
 </html>

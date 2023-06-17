@@ -3,10 +3,9 @@ const template = document.createElement("template");
 template.innerHTML = `
   <style>
     .container {
-      margin-left: 20px;
       display: flex;
       flex-direction: column;
-      background-color: #fbfbfb;
+      background: #11101d;
     }
 
     #main-button {
@@ -18,9 +17,6 @@ template.innerHTML = `
       flex-direction: row;
     }
 
-    #main-button:hover{
-      background-color: #efefef;
-    }
 
     .button-container {
       display: flex;
@@ -36,8 +32,6 @@ template.innerHTML = `
   <div class="container">
     <div class="button-container">
       <button id="main-button"></button>
-      <input type="text" placeholder="child name" id="child-name" />
-      <button id="add-child">Add Child</button>
     </div>
     <slot></slot>
   </div>
@@ -58,12 +52,13 @@ export default class TreeItem extends HTMLElement {
       const text = this.formatText(assignedNodes[0].textContent);
       this.$button.innerHTML = `
         <chevron-icon direction="0"></chevron-icon>
-        <span>${text}</span>
+        <span style='color: #fff;'>${text}</span>
       `;
       this.$icon = this._shadowRoot.querySelector("chevron-icon");
       assignedNodes[0].textContent = "";
     }
-
+    if (!this.attributes.isRoot)
+      this._shadowRoot.querySelector(".container").style.marginLeft = "20px";
     this.$button.addEventListener("click", () => {
       this.showChildren();
     });
@@ -80,7 +75,7 @@ export default class TreeItem extends HTMLElement {
   addTreeItem(text) {
     const template = document.createElement("template");
     template.innerHTML = `
-      <tree-item>${text}</tree-item>
+      <tree-item">${text}</tree-item>
     `;
     this.appendChild(template.content.cloneNode(true));
   }
