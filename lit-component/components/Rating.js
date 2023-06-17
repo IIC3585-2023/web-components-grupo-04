@@ -5,7 +5,7 @@ export default class Rating extends LitElement {
     super();
     this.rating = 1; // Initialize the rating to 0
     this.$colorActive = "red";
-    this.$colorInactive = "#ff00008f";
+    this.$colorInactive = "#ff000069";
   }
 
   static get properties() {

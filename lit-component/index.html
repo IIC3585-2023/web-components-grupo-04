@@ -17,19 +17,26 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        gap: 40px;
       }
 
       product-component {
-        width: 200px;
       }
     </style>
   </head>
   <body>
     <product-component
-      img="../assets/peluche_miku.jpg"
+      img="../assets/miku_peluche.png"
       name="Peluche Miku"
       price="20.00"
+      discount="10"
+      rating="5"
+    ></product-component>
+    <product-component
+      img="../assets/chessboard.png"
+      name="Tablero Ajedrez"
+      price="100.00"
       rating="4"
-    />
+    ></product-component>
   </body>
 </html>
