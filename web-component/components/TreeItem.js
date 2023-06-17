@@ -22,13 +22,23 @@ template.innerHTML = `
       background-color: #efefef;
     }
 
+    .button-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
     slot {
         display: none;
     }
   </style>
 
   <div class="container">
-    <button id="main-button"></button>
+    <div class="button-container">
+      <button id="main-button"></button>
+      <input type="text" placeholder="child name" id="child-name" />
+      <button id="add-child">Add Child</button>
+    </div>
     <slot></slot>
   </div>
 `;
@@ -41,26 +51,38 @@ export default class TreeItem extends HTMLElement {
 
     this.$children = this._shadowRoot.querySelector("slot");
     this.$button = this._shadowRoot.querySelector("#main-button");
+    this.$addButton = this._shadowRoot.querySelector("#add-child");
 
-    // Set the button's text to the text attribute of the custom element
-    const text = this.formatText(this.$children.assignedNodes()[0].textContent);
-    this.$button.innerHTML = `
-      <chevron-icon direction="0"></chevron-icon>
-      <span>${text}</span>
-    `;
-    this.$icon = this._shadowRoot.querySelector("chevron-icon");
-
-    // remove the text from the slot
-    this.$children.assignedNodes()[0].textContent = "";
+    const assignedNodes = this.$children.assignedNodes();
+    if (assignedNodes.length > 0) {
+      const text = this.formatText(assignedNodes[0].textContent);
+      this.$button.innerHTML = `
+        <chevron-icon direction="0"></chevron-icon>
+        <span>${text}</span>
+      `;
+      this.$icon = this._shadowRoot.querySelector("chevron-icon");
+      assignedNodes[0].textContent = "";
+    }
 
     this.$button.addEventListener("click", () => {
       this.showChildren();
+    });
+    this.$addButton.addEventListener("click", () => {
+      this.addTreeItem(this._shadowRoot.querySelector("#child-name").value);
     });
   }
 
   formatText(text) {
     const strippedText = text.trim();
     return strippedText;
+  }
+
+  addTreeItem(text) {
+    const template = document.createElement("template");
+    template.innerHTML = `
+      <tree-item>${text}</tree-item>
+    `;
+    this.appendChild(template.content.cloneNode(true));
   }
 
   showChildren() {
