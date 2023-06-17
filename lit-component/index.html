@@ -20,11 +20,21 @@
         gap: 40px;
         background-color: whitesmoke;
       }
+
+      .products-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 60px;
+        max-width: 1000px;
+      }
     </style>
   </head>
   <body>
     <cart-component id="cart"></cart-component>
 
+    <div class="products-container">
     <product-component
       img="../assets/miku_peluche.png"
       name="Peluche Miku"
@@ -38,6 +48,27 @@
       price="100.00"
       rating="4"
     ></product-component>
+    <product-component
+      img="../assets/applevisionpro.png"
+      name="Apple Vision Pro"
+      price="3499.00"
+      rating="3"
+    ></product-component>
+    <product-component
+      img="../assets/macbook.png"
+      name="Macbook Pro"
+      price="1000.00"
+      rating="4"
+      discount="5"
+    ></product-component>
+    <product-component
+      img="../assets/ps5.png"
+      name="Playstation 5"
+      price="750.00"
+      rating="4"
+      discount="15"
+    ></product-component>
+  </div>
   </body>
   <script>
     const cart = document.querySelector("#cart");
@@ -67,7 +98,8 @@
       }
       return [];
     }
-    getProducts();
+    // lo comento pq no me gustó como se ve con esas fotos jpg malas
+    // getProducts();
 
     const products = document.querySelectorAll("product-component");
     products.forEach((product) => {
