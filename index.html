@@ -29,42 +29,28 @@
             Tecno
             <tree-item>
               Consolas y Videojuegos
-              <tree-item>
-                PlayStation
-                <tree-item> Consolas </tree-item>
-                <tree-item> Juegos </tree-item>
-              </tree-item>
-              <tree-item>
-                Nintendo
-                <tree-item> Consolas </tree-item>
-                <tree-item> Juegos </tree-item>
-              </tree-item>
+              <tree-item> Playstation </tree-item>
+              <tree-item> Nintendo </tree-item>
               <tree-item> Otros </tree-item>
             </tree-item>
             <tree-item>
               Computadores
-              <tree-item>
-                Notebooks
-                <tree-item> Apple </tree-item>
-                <tree-item> Lenovo </tree-item>
-              </tree-item>
-              <tree-item>
-                Ipad y tablet
-                <tree-item> Apple </tree-item>
-                <tree-item> Samsung </tree-item>
-              </tree-item>
+              <tree-item> Notebooks </tree-item>
+              <tree-item> Ipads y tablets </tree-item>
             </tree-item>
           </tree-item>
           <tree-item>
             Regalos
             <tree-item>
               Juegos
-              <tree-item>
-                Juegos de Mesa
-                <tree-item> Tableros </tree-item>
-              </tree-item>
+              <tree-item> Juegos de Mesa </tree-item>
             </tree-item>
             <tree-item> Peluches </tree-item>
+          </tree-item>
+          <tree-item>
+            Ropa
+            <tree-item> Hombre </tree-item>
+            <tree-item> Mujer </tree-item>
           </tree-item>
         </tree-item>
       </div>
@@ -72,46 +58,7 @@
     <div class="main-content">
       <cart-component id="cart"></cart-component>
 
-      <div class="products-container">
-        <product-component
-          img="../assets/miku_peluche.png"
-          name="Peluche Miku"
-          price="20.00"
-          discount="10"
-          categories="Regalos,Peluches"
-          rating="5"
-        ></product-component>
-        <product-component
-          img="../assets/chessboard.png"
-          name="Tablero Ajedrez"
-          price="100.00"
-          categories="Regalos,Juegos,Juegos de Mesa"
-          rating="4"
-        ></product-component>
-        <product-component
-          img="../assets/applevisionpro.png"
-          name="Apple Vision Pro"
-          price="3499.00"
-          categories="Tecno,Computadores,Notebooks,Apple"
-          rating="3"
-        ></product-component>
-        <product-component
-          img="../assets/macbook.png"
-          name="Macbook Pro"
-          price="1000.00"
-          categories="Apple"
-          rating="4"
-          discount="5"
-        ></product-component>
-        <product-component
-          img="../assets/ps5.png"
-          name="Playstation 5"
-          categories="Tecno,Consolas y Videojuegos,PlayStation,Consolas"
-          price="750.00"
-          rating="4"
-          discount="15"
-        ></product-component>
-      </div>
+      <div class="products-container"></div>
     </div>
   </body>
   <script>
@@ -137,32 +84,33 @@
 
     function addProductToStore(product) {
       const productComponent = document.createElement("product-component");
-      productComponent.setAttribute("img", product.image);
-      productComponent.setAttribute("name", product.title);
+      productComponent.setAttribute("img", product.img);
+      productComponent.setAttribute("name", product.name);
       productComponent.setAttribute("price", product.price);
-      productComponent.setAttribute("rating", product.rating.rate);
+      productComponent.setAttribute("rating", product.rating);
+      if (product.discount) {
+        productComponent.setAttribute("rating", product.discount);
+      }
+      productComponent.setAttribute("categories", product.categories);
       productComponent.addToCart = addToCart;
-      document.body.appendChild(productComponent);
+      document
+        .querySelector(".products-container")
+        .appendChild(productComponent);
     }
 
     async function getProducts() {
       // buscarse una api que entregue imagenes png en vez de jpg
-      const response = await fetch("https://fakestoreapi.com/products");
+      const response = await fetch("utils/products.json");
       const json = await response.json();
       if (response.ok) {
-        return json.map((product) => addProductToStore(product));
+        return json["products"].map((product) => addProductToStore(product));
       } else {
         console.log("error");
       }
       return [];
     }
     // lo comento pq no me gustó como se ve con esas fotos jpg malas
-    // getProducts();
-
-    const products = document.querySelectorAll("product-component");
-    products.forEach((product) => {
-      product.addToCart = addToCart;
-    });
+    getProducts();
 
     function showProductsByCategory(category) {
       console.log(category);
@@ -180,6 +128,34 @@
       });
     }
 
+    // function addCategory(cat, father) {
+    //   const treeComponent = document.createElement("tree-item");
+    //   treeComponent.innerHTML = cat.name;
+    //   if (cat.categories) {
+    //     cat.categories.map((category) => addCategory(category, treeComponent));
+    //   }
+    //   father.appendChild(treeComponent);
+    // }
+
+    // async function buildTree() {
+    //   const response = await fetch("utils/categories.json");
+    //   const json = await response.json();
+    //   if (response.ok) {
+    //     json["categories"].map((category) =>
+    //       addCategory(category, document.querySelector("#root-tree"))
+    //     );
+    //     const treeItems = document.querySelectorAll("tree-item");
+    //     treeItems.forEach((treeItem) => {
+    //       treeItem.handleClick = showProductsByCategory;
+    //     });
+    //   } else {
+    //     console.log("error");
+    //   }
+    //   return [];
+    // }
+
+    // buildTree();
+    // document.querySelector("#root-tree").handleClick = showProductsByCategory;
     // iterate in all tree items, assign handleClick function to show products by category
     const treeItems = document.querySelectorAll("tree-item");
     treeItems.forEach((treeItem) => {

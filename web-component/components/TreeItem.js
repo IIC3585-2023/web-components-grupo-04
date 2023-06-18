@@ -50,7 +50,8 @@ template.innerHTML = `
 export default class TreeItem extends HTMLElement {
   constructor() {
     super();
-    this.handleClick = this.handleClick.bind(this) || null;
+    if (this.handleClick)
+      this.handleClick = this.handleClick.bind(this) || null;
     this._shadowRoot = this.attachShadow({ mode: "open" });
     this._shadowRoot.appendChild(template.content.cloneNode(true));
 

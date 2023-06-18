@@ -2,7 +2,7 @@
   "categories": [
     {
       "name": "Tecno",
-      "subcategories": [
+      "categories": [
         {
           "name": "Consolas y Videojuegos",
           "categories": [
@@ -26,12 +26,12 @@
           ]
         },
         {
+          "name": "Smartphones"
+        },
+        {
           "name": "Accesorios"
         }
       ]
-    },
-    {
-      "name": "Regalos"
     },
     {
       "name": "Regalos",

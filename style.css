@@ -12,6 +12,11 @@ body {
   flex-direction: row;
 }
 
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+
 .sidebar {
   position: fixed;
   top: 0;
@@ -21,7 +26,9 @@ body {
   background: #11101d;
   z-index: 100;
   transition: all 0.5s ease;
+  overflow: scroll;
 }
+
 .sidebar.close {
   width: 60px;
 }
