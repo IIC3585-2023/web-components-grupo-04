@@ -142,7 +142,7 @@
       productComponent.setAttribute("price", product.price);
       productComponent.setAttribute("rating", product.rating.rate);
       productComponent.addToCart = addToCart;
-      document.body.appendChild(productComponent);
+      document.querySelector(".products-container").appendChild(productComponent);
     }
 
     async function getProducts() {
