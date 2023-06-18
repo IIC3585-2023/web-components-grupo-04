@@ -20,36 +20,51 @@
     <div class="sidebar close">
       <div class="logo-details">
         <i class="bx bx-menu"></i>
-        <span class="logo_name">Nombre</span>
+        <span class="logo_name">Categorías</span>
       </div>
       <div class="dropdown-container">
-        <tree-item id="pepe" isRoot="true">
-          Motores de Bases de Datos
+        <tree-item isRoot="true" id="root-tree">
+          Todos los productos
           <tree-item>
-            Relacionales
+            Tecno
             <tree-item>
-              Open Source
-              <tree-item> MySQL </tree-item>
-              <tree-item> PostgreSQL </tree-item>
+              Consolas y Videojuegos
+              <tree-item>
+                PlayStation
+                <tree-item> Consolas </tree-item>
+                <tree-item> Juegos </tree-item>
+              </tree-item>
+              <tree-item>
+                Nintendo
+                <tree-item> Consolas </tree-item>
+                <tree-item> Juegos </tree-item>
+              </tree-item>
+              <tree-item> Otros </tree-item>
             </tree-item>
             <tree-item>
-              Propietarios
-              <tree-item> Oracle </tree-item>
-              <tree-item> SQL Server </tree-item>
+              Computadores
+              <tree-item>
+                Notebooks
+                <tree-item> Apple </tree-item>
+                <tree-item> Lenovo </tree-item>
+              </tree-item>
+              <tree-item>
+                Ipad y tablet
+                <tree-item> Apple </tree-item>
+                <tree-item> Samsung </tree-item>
+              </tree-item>
             </tree-item>
           </tree-item>
           <tree-item>
-            NoSQL
+            Regalos
             <tree-item>
-              Modelo Documentos
-              <tree-item> MongoDB </tree-item>
-              <tree-item> CouchDB </tree-item>
+              Juegos
+              <tree-item>
+                Juegos de Mesa
+                <tree-item> Tableros </tree-item>
+              </tree-item>
             </tree-item>
-            <tree-item>
-              Modelo Grafos
-              <tree-item> Neo4J </tree-item>
-              <tree-item> SparQL </tree-item>
-            </tree-item>
+            <tree-item> Peluches </tree-item>
           </tree-item>
         </tree-item>
       </div>
@@ -63,30 +78,35 @@
           name="Peluche Miku"
           price="20.00"
           discount="10"
+          categories="Regalos,Peluches"
           rating="5"
         ></product-component>
         <product-component
           img="../assets/chessboard.png"
           name="Tablero Ajedrez"
           price="100.00"
+          categories="Regalos,Juegos,Juegos de Mesa"
           rating="4"
         ></product-component>
         <product-component
           img="../assets/applevisionpro.png"
           name="Apple Vision Pro"
           price="3499.00"
+          categories="Tecno,Computadores,Notebooks,Apple"
           rating="3"
         ></product-component>
         <product-component
           img="../assets/macbook.png"
           name="Macbook Pro"
           price="1000.00"
+          categories="Apple"
           rating="4"
           discount="5"
         ></product-component>
         <product-component
           img="../assets/ps5.png"
           name="Playstation 5"
+          categories="Tecno,Consolas y Videojuegos,PlayStation,Consolas"
           price="750.00"
           rating="4"
           discount="15"
@@ -142,6 +162,28 @@
     const products = document.querySelectorAll("product-component");
     products.forEach((product) => {
       product.addToCart = addToCart;
+    });
+
+    function showProductsByCategory(category) {
+      console.log(category);
+      const products = document.querySelectorAll("product-component");
+      products.forEach((product) => {
+        const categories = product.getAttribute("categories").split(",");
+        if (
+          categories.includes(category) ||
+          category === "Todos los productos"
+        ) {
+          product.style.display = "block";
+        } else {
+          product.style.display = "none";
+        }
+      });
+    }
+
+    // iterate in all tree items, assign handleClick function to show products by category
+    const treeItems = document.querySelectorAll("tree-item");
+    treeItems.forEach((treeItem) => {
+      treeItem.handleClick = showProductsByCategory;
     });
   </script>
 </html>

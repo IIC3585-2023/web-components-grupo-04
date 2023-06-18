@@ -5,6 +5,17 @@ import {
 } from "https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js";
 
 export default class Product extends LitElement {
+  constructor() {
+    super();
+    this.addToCart = null;
+    this.categories = [];
+    this.name = "";
+    this.price = 0;
+    this.rating = 1;
+    this.discount = false;
+    this.img = "";
+  }
+
   static get styles() {
     return [style];
   }
@@ -12,6 +23,8 @@ export default class Product extends LitElement {
   static get properties() {
     return {
       addToCart: { type: Function },
+      categories: { type: Array },
+      name: { type: String },
     };
   }
 
@@ -20,6 +33,7 @@ export default class Product extends LitElement {
     this.name = this.getAttribute("name");
     this.price = this.getAttribute("price");
     this.rating = this.getAttribute("rating");
+    this.categories = this.getAttribute("categories").split(",");
     this.discount = this.getAttribute("discount") || false;
     this.img = this.getAttribute("img");
   }
@@ -50,19 +64,19 @@ export default class Product extends LitElement {
 
   handleAddToCart() {
     if (typeof this.addToCart === "function") {
-        const event = new CustomEvent("addToCart", {
-          bubbles: true,
-          composed: true,
-          detail: {
-            name: this.name,
-            price: this.price,
-            rating: this.rating,
-            discount: this.discount,
-            img: this.img,
-          },
-        });
-        this.addToCart(event); // Invoke the function with the event as an argument
-      }
+      const event = new CustomEvent("addToCart", {
+        bubbles: true,
+        composed: true,
+        detail: {
+          name: this.name,
+          price: this.price,
+          rating: this.rating,
+          discount: this.discount,
+          img: this.img,
+        },
+      });
+      this.addToCart(event); // Invoke the function with the event as an argument
+    }
   }
 
   render() {
@@ -74,7 +88,9 @@ export default class Product extends LitElement {
         <span class="name">${this.name}</span>
         ${this.renderPrice()}
         <rating-component rating="${this.rating}"></rating-component>
-        <button class="btn" @click="${this.handleAddToCart}">Add to cart</button>
+        <button class="btn" @click="${this.handleAddToCart}">
+          Add to cart
+        </button>
       </div>
     `;
   }
