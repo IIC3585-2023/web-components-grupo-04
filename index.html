@@ -56,7 +56,19 @@
       </div>
     </div>
     <div class="main-content">
+      <div class="main-header">
       <cart-component id="cart"></cart-component>
+        <button class="btn-add-product" onclick="showModal()">Add new product</button>
+        <modal-window id="add-product">
+          <div class="modal-container">
+            <span>Add new product</span>
+            <form id="add-product-form" onsubmit="return submitFormProduct()">
+              <input type="text" placeholder="Name product" name="name-product" autocomplete="off" value="sasa"/>
+              <input type="submit" value="Add" />
+            </form>
+          </div>
+        </modal-window>
+      </div>
 
       <div class="products-container"></div>
     </div>
@@ -82,9 +94,16 @@
       cart.addProduct(event.detail);
     }
 
-    function addProductToStore(product) {
+
+    async function addProductToStore(product) {
       const productComponent = document.createElement("product-component");
-      productComponent.setAttribute("img", product.img);
+      if (typeof product.img === "object") {
+        let img = URL.createObjectURL(product.img);
+        productComponent.setAttribute("img", img);
+      }
+      if (typeof product.img === "string") {
+        productComponent.setAttribute("img", product.img);
+      }
       productComponent.setAttribute("name", product.name);
       productComponent.setAttribute("price", product.price);
       productComponent.setAttribute("rating", product.rating);
@@ -160,5 +179,27 @@
     treeItems.forEach((treeItem) => {
       treeItem.handleClick = showProductsByCategory;
     });
+
+    function showModal() {
+      const modal = document.querySelector("#add-product");
+      modal.show();
+    }
+
+    function submitFormProduct() {
+      try {
+        const form = document.getElementById("add-product-form");
+        
+        const formData = new FormData(form);
+        const product = Object.fromEntries(formData.entries());
+        console.log(product)
+        // addProductToStore(product);
+      }
+      catch (error) {
+        console.log(error);
+      }
+      const modal = document.querySelector("#add-product");
+      // modal.close();
+      return false;
+    }
   </script>
 </html>

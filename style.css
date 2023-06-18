@@ -127,4 +127,38 @@ body {
   flex-wrap: wrap;
   gap: 60px;
   max-width: 1000px;
+  padding: 20px;
+}
+
+.main-header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.btn-add-product {
+  margin: 20px;
+  padding: 1.5em 2em;
+  border: none;
+  border-radius: 7px;
+  font-size: 0.8em;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: #ef4444;
+  color: white;
+  box-shadow: 4px 4px 25px -2px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease-in-out;
+}
+.btn-add-product:hover {
+  filter: brightness(1.2);
+  box-shadow: 4px 4px 25px -2px rgba(0, 0, 0, 0.5);
+}
+
+.btn-add-product:active {
+  transform: scale(0.98);
 }
