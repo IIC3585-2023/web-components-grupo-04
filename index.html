@@ -63,7 +63,7 @@
           <div class="modal-container">
             <span>Add new product</span>
             <form id="add-product-form" onsubmit="return submitFormProduct()">
-              <input type="text" placeholder="Name product" name="name-product" autocomplete="off" value="sasa"/>
+              <input type="text" placeholder="Name product" name="name-product" autocomplete="off" value="sasa" oninput="updateInputValue(event.target.value)"/>
               <input type="submit" value="Add" />
             </form>
           </div>
@@ -201,5 +201,11 @@
       // modal.close();
       return false;
     }
+
+    function updateInputValue(value) {
+    const input = document.querySelector("#add-product input[name='name-product']");
+    input.value = value;
+  }
+
   </script>
 </html>
