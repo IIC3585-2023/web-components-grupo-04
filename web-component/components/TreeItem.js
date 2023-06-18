@@ -60,8 +60,15 @@ export default class TreeItem extends HTMLElement {
     this.$addButton = this._shadowRoot.querySelector("#add-child");
 
     const assignedNodes = this.$children.assignedNodes();
-    if (assignedNodes.length > 0) {
-      this.text = this.formatText(assignedNodes[0].textContent);
+    this.text = this.formatText(assignedNodes[0].textContent);
+    if (assignedNodes.length == 1) {
+      this.$button.innerHTML = `
+        <span style='color: #fff; margin-left: 30px;'>
+          ${this.text}
+        </span>
+      `;
+      assignedNodes[0].textContent = "";
+    } else if (assignedNodes.length > 0) {
       this.$button.innerHTML = `
         <chevron-icon direction="0"></chevron-icon>
         <span style='color: #fff;'>${this.text}</span>
@@ -102,10 +109,10 @@ export default class TreeItem extends HTMLElement {
   showChildren() {
     if (this.$children.style.display === "block") {
       this.$children.style.display = "none";
-      this.$icon.direction = 0;
+      if (this.$icon) this.$icon.direction = 0;
     } else {
       this.$children.style.display = "block";
-      this.$icon.direction = 90;
+      if (this.$icon) this.$icon.direction = 90;
     }
   }
 }

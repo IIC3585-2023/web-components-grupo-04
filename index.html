@@ -113,7 +113,6 @@
     getProducts();
 
     function showProductsByCategory(category) {
-      console.log(category);
       const products = document.querySelectorAll("product-component");
       products.forEach((product) => {
         const categories = product.getAttribute("categories").split(",");
