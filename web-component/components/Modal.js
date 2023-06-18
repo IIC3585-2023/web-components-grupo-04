@@ -20,9 +20,15 @@ template.innerHTML = `
             background-color: #fefefe;
             margin: auto;
             width: 100%;
-            max-width: 500px;
+            max-width: 300px;
             box-shadow: 4px 4px 25px -2px rgba(0, 0, 0, 0.3);
             border-radius: 0.5rem;
+            z-index: 2;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.5rem;
         }
 
         .modal-header {
@@ -45,10 +51,55 @@ template.innerHTML = `
 
         .modal-body {
             padding: 2rem;
+            display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding-top: 0;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        form {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 20px;
+        }
+
+        select {
+          width: 100%;
+          padding: 0.5rem;
+        }
+
+
+        .btn-add-product {
+          margin: 20px;
+          padding: 1.5em 2em;
+          border: none;
+          border-radius: 7px;
+          font-size: 0.8em;
+          font-weight: 700;
+          letter-spacing: 1.3px;
+          text-transform: uppercase;
+          cursor: pointer;
+          background-color: #ef4444;
+          color: white;
+          box-shadow: 4px 4px 25px -2px rgba(0, 0, 0, 0.3);
+          transition: all 0.2s ease-in-out;
+        }
+        .btn-add-product:hover {
+          filter: brightness(1.2);
+          box-shadow: 4px 4px 25px -2px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-add-product:active {
+          transform: scale(0.98);
         }
 
     </style>
@@ -92,3 +143,12 @@ export default class Modal extends HTMLElement {
     this.$modal.style.display = "none";
   }
 }
+
+// DONT delete this code, chovi te conozco no lo hagas
+//////////////////////////////////7
+// this.$inputs = this.$modalBody.querySelectorAll("input");
+// this.$inputs.forEach((input) => {
+//   input.addEventListener("change", (e) => {
+//     this.querySelector(`input[name="${input.name}"]`).value = input.value;
+//   });
+// });

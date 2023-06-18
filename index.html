@@ -57,16 +57,64 @@
     </div>
     <div class="main-content">
       <div class="main-header">
-      <cart-component id="cart"></cart-component>
-        <button class="btn-add-product" onclick="showModal()">Add new product</button>
+        <cart-component id="cart"></cart-component>
+        <button class="btn-add-product" onclick="showModal()">
+          Add new product
+        </button>
         <modal-window id="add-product">
-          <div class="modal-container">
-            <span>Add new product</span>
-            <form id="add-product-form" onsubmit="return submitFormProduct()">
-              <input type="text" placeholder="Name product" name="name-product" autocomplete="off" value="sasa" oninput="updateInputValue(event.target.value)"/>
-              <input type="submit" value="Add" />
-            </form>
-          </div>
+          <span class="title">Add new product</span>
+          <form id="add-product-form" onsubmit="return submitFormProduct()">
+            <input
+              type="text"
+              placeholder="Name product"
+              name="name"
+              autocomplete="off"
+              oninput="updateInputValue(event)"
+              required
+            />
+            <input
+              type="number"
+              placeholder="Price"
+              name="price"
+              step="0.01"
+              autocomplete="off"
+              oninput="updateInputValue(event)"
+              required
+            />
+            <input
+              type="number"
+              placeholder="Rating"
+              name="rating"
+              autocomplete="off"
+              oninput="updateInputValue(event)"
+              required
+            />
+            <select
+              name="categories"
+              autocomplete="off"
+              oninput="updateInputValue(event)"
+            >
+              <option value="Tecno">Tecno</option>
+              <option value="Regalos">Regalos</option>
+              <option value="Ropa">Ropa</option>
+            </select>
+            <input
+              type="number"
+              placeholder="Discount"
+              name="discount"
+              autocomplete="off"
+              oninput="updateInputValue(event)"
+            />
+            <input
+              type="file"
+              placeholder="Image"
+              name="img"
+              autocomplete="off"
+              accept="image/*"
+              onchange="updateInputValue(event)"
+            />
+            <input type="submit" class="btn-add-product" value="Add" />
+          </form>
         </modal-window>
       </div>
 
@@ -74,6 +122,7 @@
     </div>
   </body>
   <script>
+    var imgUploaded = null;
     let arrow = document.querySelectorAll(".arrow");
     for (var i = 0; i < arrow.length; i++) {
       arrow[i].addEventListener("click", (e) => {
@@ -94,12 +143,10 @@
       cart.addProduct(event.detail);
     }
 
-
     async function addProductToStore(product) {
       const productComponent = document.createElement("product-component");
       if (typeof product.img === "object") {
-        let img = URL.createObjectURL(product.img);
-        productComponent.setAttribute("img", img);
+        productComponent.setAttribute("img", imgUploaded);
       }
       if (typeof product.img === "string") {
         productComponent.setAttribute("img", product.img);
@@ -112,9 +159,7 @@
       }
       productComponent.setAttribute("categories", product.categories);
       productComponent.addToCart = addToCart;
-      document
-        .querySelector(".products-container")
-        .appendChild(productComponent);
+      document.querySelector(".products-container").prepend(productComponent);
     }
 
     async function getProducts() {
@@ -122,7 +167,7 @@
       const response = await fetch("utils/products.json");
       const json = await response.json();
       if (response.ok) {
-        return json["products"].map((product) => addProductToStore(product));
+        return json["products"].reverse().map((product) => addProductToStore(product))
       } else {
         console.log("error");
       }
@@ -188,24 +233,26 @@
     function submitFormProduct() {
       try {
         const form = document.getElementById("add-product-form");
-        
         const formData = new FormData(form);
         const product = Object.fromEntries(formData.entries());
-        console.log(product)
-        // addProductToStore(product);
-      }
-      catch (error) {
+        addProductToStore(product);
+        const modal = document.querySelector("#add-product");
+        modal.hide();
+      } catch (error) {
         console.log(error);
       }
-      const modal = document.querySelector("#add-product");
-      // modal.close();
       return false;
     }
 
-    function updateInputValue(value) {
-    const input = document.querySelector("#add-product input[name='name-product']");
-    input.value = value;
-  }
-
+    function updateInputValue(event) {
+      if (event.target.name === "img") {
+        imgUploaded = URL.createObjectURL(event.target.files[0]);
+        return;
+      }
+      const input = document.querySelector(
+        `#add-product input[name="${event.target.name}"]`
+      );
+      input.value = event.target.value;
+    }
   </script>
 </html>

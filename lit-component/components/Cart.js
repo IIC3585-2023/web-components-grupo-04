@@ -47,9 +47,9 @@ export default class Cart extends LitElement {
 
   toggleOverflowContainer() {
     if (!this.$overflowContainer) {
-        this.$overflowContainer = this.shadowRoot.querySelector(
-            ".overflow-container"
-        );
+      this.$overflowContainer = this.shadowRoot.querySelector(
+        ".overflow-container"
+      );
     }
     if (this.$overflowContainer.style.height === "0px") {
       this.$overflowContainer.style.height = "200px";
@@ -60,11 +60,10 @@ export default class Cart extends LitElement {
     }
   }
 
-
   render() {
     return html`
       <div class="header-cart">
-        <h2>ShoppingCart</h2>
+        <span class="title">ShoppingCart</span>
         <button @click=${() => this.toggleOverflowContainer()}>
           Show/Hide
         </button>
@@ -126,8 +125,16 @@ const style = css`
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    padding: 0.5rem 0;
     width: 100%;
   }
+
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0.5rem 0;
+  }
+
 
   button {
     padding: 0.5rem 1rem;
@@ -167,7 +174,8 @@ const style = css`
     padding: 0.5rem 0;
   }
 
-  .price-tag, .total {
+  .price-tag,
+  .total {
     font-family: Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji,
       Segoe UI Symbol, Android Emoji, EmojiSymbols;
   }
@@ -182,5 +190,15 @@ const style = css`
     border-radius: 0.5rem;
     width: 95%;
     background-color: white;
+  }
+
+  @media (max-width: 728px) {
+    .title {
+      font-size: 1rem;
+    }
+
+    .total {
+      font-size: 1rem;
+    }
   }
 `;
