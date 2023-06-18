@@ -20,35 +20,54 @@
     <div class="sidebar close">
       <div class="logo-details">
         <i class="bx bx-menu"></i>
-        <span class="logo_name">Nombre</span>
+        <span class="logo_name">Categorías</span>
       </div>
       <div class="dropdown-container">
-        <tree-item id="pepe" isRoot="true">
-          Motores de Bases de Datos
-          <tree-item>
-            Relacionales
-            <tree-item>
-              Open Source
-              <tree-item> MySQL </tree-item>
-              <tree-item> PostgreSQL </tree-item>
+        <tree-item id="All" isRoot="true">
+          Todos los productos
+          <tree-item id="Tecno">
+            Tecno
+            <tree-item id="Consolas y Videojuegos">
+              Consolas y Videojuegos
+              <tree-item id="PlayStation">
+                PlayStation
+                <tree-item id="Consolas-PS"> Consolas </tree-item>
+                <tree-item id="Juegos-PS"> Juegos </tree-item>
+              </tree-item>
+              <tree-item id="Nintendo">
+                Nintendo
+                <tree-item id="Consolas-N"> Consolas </tree-item>
+                <tree-item id="Juegos-N"> Juegos </tree-item>
+              </tree-item>
+              <tree-item id="Otros-CV">
+                Otros
+              </tree-item>
             </tree-item>
-            <tree-item>
-              Propietarios
-              <tree-item> Oracle </tree-item>
-              <tree-item> SQL Server </tree-item>
+            <tree-item id="Computadores">
+              Computadores
+              <tree-item id="Notebooks">
+                Notebooks
+                <tree-item id="Apple-N"> Apple </tree-item>
+                <tree-item id="Lenovo-N"> Lenovo </tree-item>
+              </tree-item>
+              <tree-item id="Tablets">
+                Ipad y tablet
+                <tree-item id="Tablet-A"> Apple </tree-item>
+                <tree-item id="Tablet-S"> Samsung </tree-item>
+              </tree-item>
             </tree-item>
           </tree-item>
-          <tree-item>
-            NoSQL
-            <tree-item>
-              Modelo Documentos
-              <tree-item> MongoDB </tree-item>
-              <tree-item> CouchDB </tree-item>
+          <tree-item id="Regalos">
+            Regalos
+            <tree-item id="Juegos">
+              Juegos
+              <tree-item id="Juegos Mesa">
+                Juegos de Mesa
+                <tree-item id="Tableros"> Tableros </tree-item>
+              </tree-item>
             </tree-item>
-            <tree-item>
-              Modelo Grafos
-              <tree-item> Neo4J </tree-item>
-              <tree-item> SparQL </tree-item>
+            <tree-item id="Peluches">
+              Peluches
             </tree-item>
           </tree-item>
         </tree-item>
@@ -59,6 +78,7 @@
 
       <div class="products-container">
         <product-component
+          id = "peluche-miku"
           img="../assets/miku_peluche.png"
           name="Peluche Miku"
           price="20.00"
@@ -66,18 +86,21 @@
           rating="5"
         ></product-component>
         <product-component
+          id = "chessboard"
           img="../assets/chessboard.png"
           name="Tablero Ajedrez"
           price="100.00"
           rating="4"
         ></product-component>
         <product-component
+          id = "vision pro"
           img="../assets/applevisionpro.png"
           name="Apple Vision Pro"
           price="3499.00"
           rating="3"
         ></product-component>
         <product-component
+          id = "notebook"
           img="../assets/macbook.png"
           name="Macbook Pro"
           price="1000.00"
@@ -85,6 +108,7 @@
           discount="5"
         ></product-component>
         <product-component
+          id = "consola"
           img="../assets/ps5.png"
           name="Playstation 5"
           price="750.00"
@@ -125,6 +149,158 @@
       document.body.appendChild(productComponent);
     }
 
+    var treeItems = document.querySelectorAll('tree-item');
+
+    // Buscar el elemento 'Tableros' dentro de los 'tree-item'
+    // var tablerosItem;
+    treeItems.forEach(function (item) {
+      item.addEventListener('click', checkItem);
+    });
+
+    function checkItem(event){
+      const clickedElement = event.target;
+      const treeItem = findClosestTreeItem(clickedElement);
+      const treeItemId = treeItem.getAttribute('id');
+      if (treeItemId === "All"){
+        showAll();
+      }
+      if (treeItemId === 'Tecno') {
+        hideElements("Regalos")
+      }
+      if (treeItemId === "Consolas y Videojuegos"){
+        hideElements("Computadores")
+      }
+      if (treeItemId === "PlayStation"){
+        hideElements("Nintendo")
+      }
+      if (treeItemId === "Consolas-PS"){
+        hideElements("Juegos-PS")
+      }
+      if (treeItemId === "Juegos-PS"){
+        hideElements("Consolas-PS")
+      }
+      if (treeItemId === "Nintendo"){
+        hideElements("PlayStation")
+      }
+      if (treeItemId === "Consolas-N"){
+        hideElements("Juegos-N")
+      }
+      if (treeItemId === "Juegos-N"){
+        hideElements("Consolas-N")
+      }
+      if (treeItemId === "Computadores"){
+        hideElements("Consolas y Videojuegos")
+      }
+      if (treeItemId === "Notebooks"){
+        hideElements("Tablets")
+      }
+      if (treeItemId === "Apple-N"){
+        hideElements("Lenovo-N")
+      }
+      if (treeItemId === "Lenovo-N"){
+        hideElements("Apple-N")
+      }
+      if (treeItemId === "Tablets"){
+        hideElements("Notebooks")
+      }
+      if (treeItemId === "Tablet-A"){
+        hideElements("Tablet-S")
+      }
+      if (treeItemId === "Tablet-S"){
+        hideElements("Tablet-A")
+      }
+      if (treeItemId === 'Regalos') {
+        hideElements("Tecno")
+      }
+      if (treeItemId === "Juegos"){
+        hideElements("Peluches")
+      }
+      if (treeItemId === "Juegos Mesa"){
+        hideElements("None")
+      }
+      if (treeItemId === "Tableros"){
+        hideElements("None")
+      }
+      if (treeItemId === "Peluches"){
+        hideElements("Juegos")
+      }
+      if (treeItemId === "Otros-CV"){
+        hideElements("PS y N")
+      }
+    }
+
+    // Función para encontrar el tree-item ascendente más cercano Fuente: ChatGPT
+    function findClosestTreeItem(element) {
+      while (element) {
+        if (element.tagName === 'TREE-ITEM') {
+          return element;
+        }
+        element = element.parentNode;
+      }
+      return null; // Si no se encuentra ningún tree-item ascendente
+    }
+
+    var chessboard = document.getElementById('chessboard');
+    var notebook = document.getElementById('notebook');
+    var peluche = document.getElementById('peluche-miku');
+    var consola = document.getElementById('consola');
+    var vision = document.getElementById('vision pro');
+
+    function hideElements(element){
+      if (element === "Tecno"){
+        notebook.style.display = 'none';
+        consola.style.display = 'none';
+        vision.style.display = 'none';
+        chessboard.style.display = 'block';
+        peluche.style.display = 'block';
+      }
+      if (element === "Regalos"){
+        chessboard.style.display = 'none';
+        peluche.style.display = 'none';
+        vision.style.display = 'block';
+        notebook.style.display = 'block';
+        consola.style.display = 'block';
+      }
+      if (element === "Peluches"){
+        peluche.style.display = 'none';
+        chessboard.style.display = 'block';
+      }
+      if (element === "Juegos"){
+        peluche.style.display = 'block';
+        chessboard.style.display = 'none';
+      }
+      if (element === "Computadores"){
+        notebook.style.display = 'none';
+        vision.style.display = 'block';
+        consola.style.display = 'block';
+      }
+      if (element === "Consolas y Videojuegos"){
+        consola.style.display = 'none';
+        notebook.style.display = 'block';
+        vision.style.display = 'none';
+      }
+      if (element === "Nintendo"){
+        consola.style.display = 'block';
+        vision.style.display = 'none';
+      }
+      if (element === "PlayStation"){
+        consola.style.display = 'none';
+        vision.style.display = 'none';
+      }
+      if (element === "PS y N"){
+        consola.style.display = 'none';
+        vision.style.display = 'block';
+      }
+    }
+
+    function showAll(){
+      chessboard.style.display = 'block';
+      peluche.style.display = 'block';
+      vision.style.display = 'block';
+      notebook.style.display = 'block';
+      consola.style.display = 'block';
+    }
+  
     async function getProducts() {
       // buscarse una api que entregue imagenes png en vez de jpg
       const response = await fetch("https://fakestoreapi.com/products");
