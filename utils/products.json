@@ -1,0 +1,116 @@
+{
+  "products": [
+    {
+      "img": "../assets/miku_peluche.png",
+      "name": "Peluche Miku",
+      "price": "20.00",
+      "discount": "10",
+      "rating": 5,
+      "categories": "Regalos,Peluches"
+    },
+    {
+      "img": "../assets/chessboard.png",
+      "name": "Tablero Ajedrez",
+      "price": "100.00",
+      "rating": 4,
+      "categories": "Regalos,Juegos,Juegos de Mesa"
+    },
+    {
+      "img": "../assets/applevisionpro.png",
+      "name": "Apple Vision Pro",
+      "price": "3499.00",
+      "rating": 3,
+      "categories": "Tecno,Accesorios"
+    },
+    {
+      "img": "../assets/macbook.png",
+      "name": "Macbook Pro",
+      "price": "1000.00",
+      "rating": 4,
+      "discount": 5,
+      "categories": "Tecno,Computadores,Notebooks"
+    },
+    {
+      "img": "../assets/ps5.png",
+      "name": "Playstation 5",
+      "price": "750.00",
+      "rating": 4,
+      "discount": 15,
+      "categories": "Tecno,Consolas y Videojuegos,Playstation"
+    },
+    {
+      "img": "../assets/headphones.png",
+      "name": "Headphones",
+      "price": "50.00",
+      "rating": 5,
+      "categories": "Tecno,Accesorios"
+    },
+    {
+      "img": "../assets/iphone.png",
+      "name": "Iphone 14",
+      "price": "500.00",
+      "rating": 2,
+      "discount": 20,
+      "categories": "Tecno,Consolas y Videojuegos,Playstation"
+    },
+    {
+      "img": "../assets/silla-gamer.png",
+      "name": "Silla gamer",
+      "price": "150.00",
+      "rating": 4,
+      "categories": "Tecno,Accesorios"
+    },
+    {
+      "img": "../assets/ropa-hombre-traje.png",
+      "name": "Traje hombre",
+      "price": "80.00",
+      "rating": 3,
+      "discount": 10,
+      "categories": "Ropa,Hombre"
+    },
+    {
+      "img": "../assets/ropa-mujer-blusa.png",
+      "name": "Blusa Mujer",
+      "price": "70.00",
+      "rating": 5,
+      "categories": "Ropa,Mujer"
+    },
+    {
+      "img": "../assets/ropa-hombre-poleron.png",
+      "name": "Polerón Hombre",
+      "price": "200.00",
+      "rating": 4,
+      "categories": "Ropa,Hombre"
+    },
+    {
+      "img": "../assets/ropa-hombre-camisa.png",
+      "name": "Camisa Hombre",
+      "price": "400.00",
+      "rating": 5,
+      "discount": 10,
+      "categories": "Ropa,Hombre"
+    },
+    {
+      "img": "../assets/ropa-mujer-vestido.png",
+      "name": "Vestido Mujer",
+      "price": "800.00",
+      "rating": 3,
+      "categories": "Ropa,Mujer"
+    },
+    {
+      "img": "../assets/ipad.png",
+      "name": "Ipad Pro",
+      "price": "10.00",
+      "rating": 5,
+      "categories": "Tecno,Computadores,Ipads y tablets"
+    },
+    {
+      "img": "../assets/nintendo-switch.png",
+      "name": "Nintendo Switch",
+      "price": "200.00",
+      "rating": 2,
+      "discount": 15,
+      "categories": "Tecno,Consolas y Videojuegos,Nintendo"
+    }
+  ]
+}

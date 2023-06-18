@@ -1,0 +1,64 @@
+{
+  "categories": [
+    {
+      "name": "Tecno",
+      "subcategories": [
+        {
+          "name": "Consolas y Videojuegos",
+          "categories": [
+            {
+              "name": "Playstation"
+            },
+            {
+              "name": "Nintendo"
+            }
+          ]
+        },
+        {
+          "name": "Computadores",
+          "categories": [
+            {
+              "name": "Notebooks"
+            },
+            {
+              "name": "Ipads y tablets"
+            }
+          ]
+        },
+        {
+          "name": "Accesorios"
+        }
+      ]
+    },
+    {
+      "name": "Regalos"
+    },
+    {
+      "name": "Regalos",
+      "categories": [
+        {
+          "name": "Juegos",
+          "categories": [
+            {
+              "name": "Juegos de Mesa"
+            }
+          ]
+        },
+        {
+          "name": "Peluches"
+        }
+      ]
+    },
+    {
+      "name": "Ropa",
+      "categories": [
+        {
+          "name": "Hombre"
+        },
+        {
+          "name": "Mujer"
+        }
+      ]
+    }
+  ]
+}
