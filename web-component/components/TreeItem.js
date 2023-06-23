@@ -79,7 +79,7 @@ export default class TreeItem extends HTMLElement {
     this.text = this.formatText(assignedNodes[0].textContent);
     if (assignedNodes.length == 1) {
       this.$button.innerHTML = `
-        <span class="category-name left-margin" id="category-name">
+        <span class="left-margin">
           ${this.text}
         </span>
       `;
@@ -87,7 +87,7 @@ export default class TreeItem extends HTMLElement {
     } else if (assignedNodes.length > 0) {
       this.$button.innerHTML = `
         <chevron-icon direction="0"></chevron-icon>
-        <span class="category-name" id="category-name"'>${this.text}</span>
+        <span>${this.text}</span>
       `;
       this.$icon = this._shadowRoot.querySelector("chevron-icon");
       assignedNodes[0].textContent = "";
