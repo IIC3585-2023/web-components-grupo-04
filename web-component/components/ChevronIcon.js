@@ -7,6 +7,15 @@ template.innerHTML = `
         aspect-ratio: 1;
         fill: #fff;
     }
+    
+    .hovered{
+      fill: #ef4444 !important;
+    }
+
+    .selected{
+      fill: #ef4444 !important;
+    }
+
 </style>
 
 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512">
@@ -50,5 +59,9 @@ export default class ChevronIcon extends HTMLElement {
 
   render() {
     this.$icon.style.transform = `rotate(${this.direction}deg)`;
+  }
+
+  toggleColor() {
+    this.$icon.classList.toggle("selected");
   }
 }
