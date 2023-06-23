@@ -97,7 +97,7 @@ export default class TreeItem extends HTMLElement {
       if (this.handleClick) {
         this.handleClick(this.text);
         this.$button.classList.add("selected");
-        this.$icon.toggleColor();
+        if (this.$icon) this.$icon.toggleColor();
       }
     });
     this.$addButton.addEventListener("click", () => {
