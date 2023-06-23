@@ -143,6 +143,10 @@
       cart.addProduct(event.detail);
     }
 
+    function deleteFromCart(event) {
+      cart.deleteProduct(event.detail);
+    }
+
     async function addProductToStore(product) {
       const productComponent = document.createElement("product-component");
       if (typeof product.img === "object") {
@@ -159,6 +163,7 @@
       }
       productComponent.setAttribute("categories", product.categories);
       productComponent.addToCart = addToCart;
+      productComponent.deleteFromCart = deleteFromCart;
       document.querySelector(".products-container").prepend(productComponent);
     }
 

@@ -33,6 +33,13 @@ export default class Cart extends LitElement {
     this.requestUpdate();
   }
 
+  deleteProduct(product) {
+    if (this.products[product.name]) {
+      delete this.products[product.name];
+      this.requestUpdate();
+    }
+  }
+
   getTotal() {
     return Object.keys(this.products).reduce((acc, product) => {
       return (

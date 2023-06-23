@@ -8,6 +8,7 @@ export default class Product extends LitElement {
   constructor() {
     super();
     this.addToCart = null;
+    this.deleteFromCart = null;
     this.categories = [];
     this.name = "";
     this.price = 0;
@@ -23,6 +24,7 @@ export default class Product extends LitElement {
   static get properties() {
     return {
       addToCart: { type: Function },
+      deleteFromCart: { type: Function },
       categories: { type: Array },
       name: { type: String },
     };
@@ -79,6 +81,20 @@ export default class Product extends LitElement {
     }
   }
 
+  handleDeleteFromCart() {
+    console.log("uwu")
+    if (typeof this.deleteFromCart === "function") {
+      const event = new CustomEvent("deleteFromCart", {
+        bubbles: true,
+        composed: true,
+        detail: {
+          name: this.name,
+        },
+      });
+      this.deleteFromCart(event); // Invoke the function with the event as an argument
+    }
+  }
+
   render() {
     return html`
       <div class="container-img">
@@ -91,6 +107,7 @@ export default class Product extends LitElement {
         <button class="btn" @click="${this.handleAddToCart}">
           Add to cart
         </button>
+        <button class="btn" @click="${this.handleDeleteFromCart}">Remove from cart</button>
       </div>
     `;
   }
