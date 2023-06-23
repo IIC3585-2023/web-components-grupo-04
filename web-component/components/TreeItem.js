@@ -6,6 +6,7 @@ template.innerHTML = `
       display: flex;
       flex-direction: column;
       background: #11101d;
+      margin-left: 20px;
     }
 
     #main-button {
@@ -35,6 +36,23 @@ template.innerHTML = `
     slot {
         display: none;
     }
+
+    #main-button {
+      color: #fff;
+    }
+    
+    #main-button:hover span {
+      color: #ef4444; 
+    }
+
+    .left-margin{
+      margin-left: 30px;
+    }
+
+    #main-button.selected {
+      color: #ef4444 !important;
+    }
+    
   </style>
 
   <div class="container">
@@ -61,7 +79,7 @@ export default class TreeItem extends HTMLElement {
     this.text = this.formatText(assignedNodes[0].textContent);
     if (assignedNodes.length == 1) {
       this.$button.innerHTML = `
-        <span style='color: #fff; margin-left: 30px;'>
+        <span class="category-name left-margin" id="category-name">
           ${this.text}
         </span>
       `;
@@ -69,21 +87,33 @@ export default class TreeItem extends HTMLElement {
     } else if (assignedNodes.length > 0) {
       this.$button.innerHTML = `
         <chevron-icon direction="0"></chevron-icon>
-        <span style='color: #fff;'>${this.text}</span>
+        <span class="category-name" id="category-name"'>${this.text}</span>
       `;
       this.$icon = this._shadowRoot.querySelector("chevron-icon");
       assignedNodes[0].textContent = "";
     }
-    if (!this.attributes.isRoot)
-      this._shadowRoot.querySelector(".container").style.marginLeft = "20px";
     this.$button.addEventListener("click", () => {
       this.showChildren();
       if (this.handleClick) {
         this.handleClick(this.text);
+        this.$button.classList.add("selected");
+        this.$icon.toggleColor();
       }
     });
     this.$addButton.addEventListener("click", () => {
       this.addTreeItem(this._shadowRoot.querySelector("#child-name").value);
+    });
+
+    this.$button.addEventListener("mouseover", () => {
+      if (this.$icon) {
+        this.$icon._shadowRoot.querySelector("svg").classList.add("hovered");
+      }
+    });
+
+    this.$button.addEventListener("mouseout", () => {
+      if (this.$icon) {
+        this.$icon._shadowRoot.querySelector("svg").classList.remove("hovered");
+      }
     });
   }
 
@@ -93,7 +123,7 @@ export default class TreeItem extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["isRoot"];
+    return [];
   }
 
   addTreeItem(text) {
@@ -102,6 +132,13 @@ export default class TreeItem extends HTMLElement {
       <tree-item">${text}</tree-item>
     `;
     this.appendChild(template.content.cloneNode(true));
+  }
+
+  removeSelectedClass() {
+    if (this.$button.classList.contains("selected")) {
+      this.$button.classList.remove("selected");
+      if (this.$icon) this.$icon.toggleColor();
+    }
   }
 
   showChildren() {

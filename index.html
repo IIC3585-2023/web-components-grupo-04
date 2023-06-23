@@ -23,7 +23,7 @@
         <span class="logo_name">Categorías</span>
       </div>
       <div class="dropdown-container">
-        <tree-item isRoot="true" id="root-tree">
+        <tree-item>
           Todos los productos
           <tree-item>
             Tecno
@@ -167,7 +167,9 @@
       const response = await fetch("utils/products.json");
       const json = await response.json();
       if (response.ok) {
-        return json["products"].reverse().map((product) => addProductToStore(product))
+        return json["products"]
+          .reverse()
+          .map((product) => addProductToStore(product));
       } else {
         console.log("error");
       }
@@ -188,6 +190,9 @@
         } else {
           product.style.display = "none";
         }
+      });
+      treeItems.forEach((treeItem) => {
+        treeItem.removeSelectedClass();
       });
     }
 
