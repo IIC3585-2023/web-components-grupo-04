@@ -82,7 +82,6 @@ export default class Product extends LitElement {
   }
 
   handleDeleteFromCart() {
-    console.log("uwu")
     if (typeof this.deleteFromCart === "function") {
       const event = new CustomEvent("deleteFromCart", {
         bubbles: true,
