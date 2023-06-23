@@ -84,7 +84,7 @@ export default class TreeItem extends HTMLElement {
         </span>
       `;
       assignedNodes[0].textContent = "";
-    } else if (assignedNodes.length > 0) {
+    } else if (assignedNodes.length > 1) {
       this.$button.innerHTML = `
         <chevron-icon direction="0"></chevron-icon>
         <span>${this.text}</span>
