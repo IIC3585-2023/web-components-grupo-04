@@ -69,7 +69,7 @@
       "categories": "Ropa,Hombre"
     },
     {
-      "img": "../assets/ropa-mujer-blusa.png",
+      "img": "./assets/ropa-mujer-blusa.png",
       "name": "Blusa Mujer",
       "price": "70.00",
       "rating": 5,
