@@ -114,7 +114,7 @@ const style = css`
     top: -10px;
     left: -40px;
     display: flex;
-    background-color: #333;
+    background-color: rgb(56 55 63);
     border-radius: 0.5rem;
     align-items: center;
     justify-content: center;
