@@ -54,7 +54,7 @@
       "categories": "Tecno,Smartphones"
     },
     {
-      "img": "../assets/silla-gamer.png",
+      "img": "./assets/silla-gamer.png",
       "name": "Silla gamer",
       "price": "150.00",
       "rating": 4,
