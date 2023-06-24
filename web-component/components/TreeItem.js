@@ -45,6 +45,11 @@ template.innerHTML = `
       color: #ef4444; 
     }
 
+    #main-button:hover chevron-icon{
+      fill: #ef4444 !important;
+    }
+    
+
     .left-margin{
       margin-left: 30px;
     }
@@ -86,7 +91,7 @@ export default class TreeItem extends HTMLElement {
       assignedNodes[0].textContent = "";
     } else if (assignedNodes.length > 1) {
       this.$button.innerHTML = `
-        <chevron-icon direction="0"></chevron-icon>
+        <chevron-icon direction="0" style="fill: #fff"></chevron-icon>
         <span>${this.text}</span>
       `;
       this.$icon = this._shadowRoot.querySelector("chevron-icon");
@@ -102,18 +107,6 @@ export default class TreeItem extends HTMLElement {
     });
     this.$addButton.addEventListener("click", () => {
       this.addTreeItem(this._shadowRoot.querySelector("#child-name").value);
-    });
-
-    this.$button.addEventListener("mouseover", () => {
-      if (this.$icon) {
-        this.$icon._shadowRoot.querySelector("svg").classList.add("hovered");
-      }
-    });
-
-    this.$button.addEventListener("mouseout", () => {
-      if (this.$icon) {
-        this.$icon._shadowRoot.querySelector("svg").classList.remove("hovered");
-      }
     });
   }
 
