@@ -60,6 +60,11 @@ export default class Cart extends LitElement {
     }
   }
 
+  removeProduct(product) {
+    delete this.products[product];
+    this.requestUpdate();
+  }
+
   render() {
     return html`
       <div class="header-cart">
@@ -72,6 +77,12 @@ export default class Cart extends LitElement {
         ${Object.keys(this.products).map(
           (product) => html`
             <div class="product-row">
+              <button
+                @click=${() => this.removeProduct(product)}
+                style="font-size:1.5rem;padding:0.25rem 0.75rem"
+              >
+                &times;
+              </button>
               <span class="name">${product}</span>
               <span class="price-tag"
                 >$
@@ -134,7 +145,6 @@ const style = css`
     font-weight: bold;
     padding: 0.5rem 0;
   }
-
 
   button {
     padding: 0.5rem 1rem;
