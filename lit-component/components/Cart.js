@@ -79,11 +79,15 @@ export default class Cart extends LitElement {
             <div class="product-row">
               <button
                 @click=${() => this.removeProduct(product)}
-                style="font-size:1.5rem;padding:0.25rem 0.75rem"
+                class="remove-button"
               >
                 &times;
               </button>
-              <span class="name">${product}</span>
+              <span class="name"
+                >${window.innerWidth < 700 && product.length > 13
+                  ? product.substring(0, 13) + "..."
+                  : product}</span
+              >
               <span class="price-tag"
                 >$
                 ${(
@@ -109,7 +113,7 @@ export default class Cart extends LitElement {
           `
         )}
       </div>
-      <span class="total">Total: $${this.getTotal().toFixed(2)}</span>
+      <span class="total">Total $${this.getTotal().toFixed(2)}</span>
     `;
   }
 }
@@ -161,7 +165,26 @@ const style = css`
   }
 
   input {
-    width: 50px;
+    width: 30px;
+    margin: 0 0.5rem;
+  }
+
+  .remove-button {
+    all: unset;
+    cursor: pointer;
+    padding: 0 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+  }
+  .remove-button:hover {
+    background-color: #f1f1f1;
+  }
+
+  @media (max-width: 728px) {
+    input {
+      width: 20px;
+      margin: 0 0.3rem;
+    }
   }
 
   .overflow-container {
