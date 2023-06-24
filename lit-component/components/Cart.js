@@ -165,7 +165,7 @@ const style = css`
   }
 
   input {
-    width: 30px;
+    width: 50px;
     margin: 0 0.5rem;
   }
 
