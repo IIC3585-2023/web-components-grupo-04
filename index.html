@@ -242,6 +242,8 @@
       try {
         const form = document.getElementById("add-product-form");
         const formData = new FormData(form);
+        const selectedCategory = document.querySelector('select[name="categories"]').value;
+        formData.set("categories", selectedCategory);
         const product = Object.fromEntries(formData.entries());
         addProductToStore(product);
         const modal = document.querySelector("#add-product");
@@ -257,10 +259,16 @@
         imgUploaded = URL.createObjectURL(event.target.files[0]);
         return;
       }
+      if (event.target.name === "categories"){
+        document.querySelector('select[name="categories"]').value = event.target.value;
+        return;
+      }
       const input = document.querySelector(
         `#add-product input[name="${event.target.name}"]`
       );
-      input.value = event.target.value;
+      if (input) {
+        input.value = event.target.value;
+      }
     }
   </script>
 </html>
